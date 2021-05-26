@@ -13,4 +13,16 @@ Route::get('/pizzas/{id}', '\App\Http\Controllers\PizzaController@show' );
 // POST Request:
 Route::post('/pizzas', '\App\Http\Controllers\PizzaController@store');
 
+// DELETE Request
+Route::delete('/pizzas/{id}', '\App\Http\Controllers\PizzaController@destory');
+
+/**
+ * While running this project drop the price column from the database
+ * =>show Database;
+ * =>use pizzahouse;
+ * =>describe pizzas; // This will list all the tables row and columns
+ * => alter table pizzas
+ *  drop column price; 
+ */
+
 
