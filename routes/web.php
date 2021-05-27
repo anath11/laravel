@@ -4,17 +4,17 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Route::get('/pizzas', 'App\Http\Controllers\PizzaController@index')->middleware('auth');
+Route::get('/pizzas', 'App\Http\Controllers\PizzaController@index')->name('pizzas.index')->middleware('auth');
 
-Route::get('/pizzas/create','App\Http\Controllers\PizzaController@create');
+Route::get('/pizzas/create','App\Http\Controllers\PizzaController@create')->name('pizzas.create');
 
-Route::get('/pizzas/{id}', '\App\Http\Controllers\PizzaController@show' );
+Route::get('/pizzas/{id}', '\App\Http\Controllers\PizzaController@show')->name('pizzas.show')->middleware('auth');
 
 // POST Request:
-Route::post('/pizzas', '\App\Http\Controllers\PizzaController@store')->middleware('auth');
+Route::post('/pizzas', '\App\Http\Controllers\PizzaController@store')->name('pizzas.store');
 
 // DELETE Request
-Route::delete('/pizzas/{id}', '\App\Http\Controllers\PizzaController@destory')->middleware('auth');
+Route::delete('/pizzas/{id}', '\App\Http\Controllers\PizzaController@destory')->name('pizzas.destory')->middleware('auth');
 
 /**
  * While running this project drop the price column from the database
@@ -27,7 +27,9 @@ Route::delete('/pizzas/{id}', '\App\Http\Controllers\PizzaController@destory')->
 
 
 
-Auth::routes();
+Auth::routes([
+  'register'=>false
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
